@@ -11,7 +11,7 @@ using System.Data.Entity.Validation;
 
 namespace Lab9_ContosoUniversity.DAL
 {
-    class SchoolContext : DbContext
+    public class SchoolContext : DbContext
     {
 
         //specifying name of connection string, but entity framework would have mapped it to SchoolContext anyway
