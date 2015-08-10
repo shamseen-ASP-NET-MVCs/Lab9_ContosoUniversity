@@ -19,13 +19,13 @@ namespace Lab9_ContosoUniversity.Controllers
         public ActionResult About()
         {
             //for every unique enrollment date, create a new collection dategroup
-            //then create a new instance of EnrollmentDateGroup and pass in the date and number of students 
+            //then create a new instance of EnrollmentDateGroup and pass in the date and number of students
             IQueryable<EnrollmentDateGroup> data = from student in db.Students
                                                     group student by student.EnrollmentDate into dategroup
                                                     select new EnrollmentDateGroup()
                                                     {
-                                                        EnrollmentDate = dategroup.Key, //the actual date
-                                                        StudentCount = dategroup.Count() //num of students
+                                                        EnrollmentDate = dategroup.Key,
+                                                        StudentCount = dategroup.Count()
                                                     };
             return View(data.ToList());
         }
@@ -35,6 +35,13 @@ namespace Lab9_ContosoUniversity.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        //closing db connection once it's done processing.
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
