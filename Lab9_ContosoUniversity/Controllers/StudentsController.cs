@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Lab9_ContosoUniversity.DAL;
 using Lab9_ContosoUniversity.Models;
+using PagedList;
 
 namespace Lab9_ContosoUniversity.Controllers
 {
@@ -16,10 +17,19 @@ namespace Lab9_ContosoUniversity.Controllers
         private SchoolContext db = new SchoolContext();
 
         // GET: Students
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder; //saving sortOrder before we modify it
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParam = sortOrder == "Date" ? "date_desc_" : "Date";
+
+            if (searchString != null) //defaulting to first page of results if user searched something
+                page = 1;
+
+            else
+                searchString = currentFilter; //otherwise setting the searchstring to whatever filter is
+
+            ViewBag.CurrentFilter = searchString;
 
             var students = from s in db.Students
                            select s;
@@ -48,7 +58,10 @@ namespace Lab9_ContosoUniversity.Controllers
                     break;
             }
 
-            return View(students.ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(students.ToPagedList(pageNumber, pageSize));
+            //passing in a list that can be separated to different pages
         }
 
         // GET: Students/Details/5
