@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Lab9_ContosoUniversity.DAL;
 using Lab9_ContosoUniversity.Models;
 using PagedList;
+using System.Data.Entity.Infrastructure;
 
 namespace Lab9_ContosoUniversity.Controllers
 {
@@ -101,7 +102,7 @@ namespace Lab9_ContosoUniversity.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch (DataException /* dex */)
+            catch (RetryLimitExceededException /* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
@@ -172,7 +173,9 @@ namespace Lab9_ContosoUniversity.Controllers
                 db.SaveChanges();
             }
 
-            catch (DataException /* dex */)
+            //if code has retried db connection too many times, show the error
+            //because errors may not have been transient if they've needed this many attempts
+            catch (RetryLimitExceededException /* dex */)
             {
                 //log error (uncomment dex var name and add a line here to write a log.
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
