@@ -22,7 +22,8 @@ namespace Lab9_ContosoUniversity.Models
         //nav properties ==> virtual so as to use lazy loading
         //one-to-one
         public virtual Course Course { get; set; }
-        public virtual Student Student { get; set; }
+        public virtual Student Student { get; set; }
+
 
     }
 }
