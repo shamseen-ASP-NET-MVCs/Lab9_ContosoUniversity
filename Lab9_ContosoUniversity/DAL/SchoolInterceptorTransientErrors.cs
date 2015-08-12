@@ -23,13 +23,17 @@ namespace Lab9_ContosoUniversity.DAL
         public override void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
         {
             bool throwTransientErrors = false;
+
+            //if you search "Throw" in the students index, throw this one error.
             if (command.Parameters.Count > 0 && command.Parameters[0].Value.ToString() == "%Throw%")
             {
                 throwTransientErrors = true;
-                command.Parameters[0].Value = "%an%";
-                command.Parameters[1].Value = "%an%";
+                command.Parameters[0].Value = "%an%"; //first name search parameter
+                command.Parameters[1].Value = "%an%"; //last name search parameter
             }
 
+            //also check if connection has been retried 4 times. if it has, don't throw dummy error
+            //because transient errors are usually resolved after a few tries (execution policy defined 4 max)
             if (throwTransientErrors && _counter < 4)
             {
                 _logger.Information("Returning transient error for command: {0}", command.CommandText);
