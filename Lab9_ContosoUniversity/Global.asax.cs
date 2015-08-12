@@ -5,8 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Lab9_ContosoUniversity.DAL;
-using System.Data.Entity.Infrastructure.Interception;
 
 namespace Lab9_ContosoUniversity
 {
@@ -18,10 +16,6 @@ namespace Lab9_ContosoUniversity
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            //telling interceptor to run. can put anywhere, but this is nice.
-            DbInterception.Add(new SchoolInterceptorTransientErrors());
-            DbInterception.Add(new SchoolInterceptorLogging());
         }
     }
 }
