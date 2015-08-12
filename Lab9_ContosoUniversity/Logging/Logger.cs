@@ -62,8 +62,8 @@ namespace Lab9_ContosoUniversity.Logging
             Trace.TraceError(FormatExceptionMessage(exception, fmt, vars));
         }
 
-        //takes info and makes a message that shows the component(external service it's requesting to), method that's intercepting,
-        //time elapsed, and properties. then shows it as an informative message to trace listeners
+        //takes info and makes a message that shows the component, method, timespan, properties
+        //then shows it as an informative message to trace listeners
         public void TraceApi (string componentName, string method, TimeSpan timespan, string properties)
         {
             string message = String.Concat("Component:", componentName, "; Method:", method, ";Timespan:", 
