@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Lab9_ContosoUniversity.Models
 {
     public class Student
     {
         public int ID { get; set; }
+        [StringLength(50)]
         public string LastName { get; set; }
+        [StringLength(50, ErrorMessage ="First name cannot be longer than 50 characters.")]
         public string FirstMidName { get; set; }
+
+        [DataType(DataType.Date)] //only want to keep track of the date, not time
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EnrollmentDate { get; set; }
 
         //nav property => virtual so as to use lazy loading
