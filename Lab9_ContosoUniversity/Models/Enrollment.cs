@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Lab9_ContosoUniversity.Models
 {
@@ -13,6 +14,8 @@ namespace Lab9_ContosoUniversity.Models
     public class Enrollment
     {
         public int EnrollmentID { get; set; }
+
+        [DisplayFormat(NullDisplayText ="No grade")]
         public Grade? Grade { get; set; } //? means Grade can be nullable
 
         //foreign keys
