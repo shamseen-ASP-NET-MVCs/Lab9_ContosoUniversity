@@ -156,6 +156,10 @@
     <Compile Include="Migrations\201508121759590_StudentPropertiesSettings.Designer.cs">
       <DependentUpon>201508121759590_StudentPropertiesSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508181753207_ComplexDataModel.cs" />
+    <Compile Include="Migrations\201508181753207_ComplexDataModel.Designer.cs">
+      <DependentUpon>201508181753207_ComplexDataModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
@@ -210,6 +214,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="bin\Lab9_ContosoUniversity.dll.config" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -267,6 +272,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508121759590_StudentPropertiesSettings.resx">
       <DependentUpon>201508121759590_StudentPropertiesSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508181753207_ComplexDataModel.resx">
+      <DependentUpon>201508181753207_ComplexDataModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
